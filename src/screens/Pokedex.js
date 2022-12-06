@@ -2,10 +2,11 @@ import { View, Text } from 'react-native'
 import React ,{useState, useEffect} from 'react'
 import {getPokemonsApi, getPokemonDetailsByUrlApi} from "../api/pokemon"
 import PokemonList from '../components/PokemonList';
+// import PokemonCard from '../components/PokemonCard';
 
 export default function Pokedex() {
   const [pokemons,setPokemon] = useState([]);
-  console.log('pokemosn', pokemons)
+  const [nextUrl, setNextUrl] = useState(null);
 
   useEffect(()=>{
     (async()=>{
@@ -15,7 +16,8 @@ export default function Pokedex() {
   },[]);
   const loadPokemons =async () =>{
     try{
-      const response = await getPokemonsApi();
+      const response = await getPokemonsApi(nextUrl);
+      setNextUrl(response.next)
       const pokemonsArray = [];
       for await(const pokemon of response.results){
         const pokemonDetails = await getPokemonDetailsByUrlApi(pokemon.url);
@@ -34,7 +36,9 @@ export default function Pokedex() {
   }
   return (
     <View>
-      <Text>Pokedex</Text>
+      <PokemonList pokemons = {pokemons} loadPokemons = {loadPokemons} isNext={nextUrl}/>
+      {/* <Text>Hello</Text> */}
+      <PokemonList></PokemonList>
     </View>
   );
 }
