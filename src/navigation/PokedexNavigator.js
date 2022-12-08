@@ -8,7 +8,7 @@ export default function AccountNavigator() {
   return (
         <Stack.Navigator>
             <Stack.Screen name='Pokedex' component={Pokedex} options={{title:"", headerTransparent: true}} />
-            <Stack.Screen name='Pokemon' component={Pokemon} options={{title:'Pokemon'}} />
+            <Stack.Screen name='Pokemon' component={Pokemon} options={{title:'',headerTransparent: true}} />
         </Stack.Navigator>
   )
 }
