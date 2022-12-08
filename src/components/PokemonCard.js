@@ -10,8 +10,7 @@ export default function PokemonCard(props) {
     const bgStyles = {backgroundColor: pokemonColor, ...styles.bgStyles}
 
     const goToPokemon= ()=>{
-        console.log(`Vamos al prokemon : ${pokemon.name}`)
-        navigation.navigate('pokemon');
+        navigation.navigate('Pokemon',{id: pokemon.id});
     }
   return (
     <TouchableWithoutFeedback  onPress={goToPokemon}>
